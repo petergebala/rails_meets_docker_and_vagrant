@@ -19,14 +19,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     rails.vm.provider 'docker' do |d|
       d.image           = 'petergebala/docker_rails'
       d.name            = 'example_rails'
-      d.create_args     = ['-i', '-t']
-      d.cmd             = ['/bin/bash', '-l']
       d.remains_running = false
       d.ports           = ['3000:3000']
 
       d.link('example_postgres:postgres')
+      d.has_ssh         = true
     end
 
     rails.vm.synced_folder ".", "/home/deployer/app", owner: 'deployer', group: 'deployer'
   end
+
+  config.ssh.username         = 'deployer'
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+  config.ssh.shell            = '/bin/zsh -l'
+  config.vm.provision "shell", inline: "echo SSH works!"
 end
