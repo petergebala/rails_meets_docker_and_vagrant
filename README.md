@@ -8,7 +8,8 @@
 4. Run `vagrant up postgres --provider=docker`
 5. Run `vagrant up rails --provider=docker`
 6. Attach to rails app: `docker attach example_rails` or connect via ssh: `vagrant ssh rails`
-7. Then do what you want. Run server, execute rake tasks, run tests.
+7. Install gems via: `bundle install --path vendor/bundler`
+8. Then do what you want. Run server, execute rake tasks, run tests.
 
 
 #### Additional Information
